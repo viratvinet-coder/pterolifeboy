@@ -1,25 +1,29 @@
 #!/usr/bin/env bash
 
 # Color codes
-RED='\e[31m'
-GREEN='\e[32m'
 CYAN='\e[36m'
 YELLOW='\e[33m'
+GREEN='\e[32m'
+RED='\e[31m'
 ENDCOLOR='\e[0m'
 BOLD='\e[1m'
 
-# ASCII banner
+# MAIN MENU banner
 echo -e "${CYAN}${BOLD}"
-echo "██████╗ ████████╗██████╗ ███████╗██╗   ██╗"
-echo "██╔══██╗╚══██╔══╝██╔══██╗██╔════╝██║   ██║"
-echo "██████╔╝   ██║   ██║  ██║█████╗  ██║   ██║"
-echo "██╔══██╗   ██║   ██║  ██║██╔══╝  ██║   ██║"
-echo "██║  ██║   ██║   ██████╔╝███████╗╚██████╔╝"
-echo "╚═╝  ╚═╝   ╚═╝   ╚═════╝ ╚══════╝ ╚═════╝ "
+echo " _______  _______ _________ _          _______  _______  _                "
+echo "(       )(  ___  )\__   __/( (    /|  (       )(  ____ \( (    /||\     /|"
+echo "| () () || (   ) |   ) (   |  \  ( |  | () () || (    \/|  \  ( || )   ( |"
+echo "| || || || (___) |   | |   |   \ | |  | || || || (__    |   \ | || |   | |"
+echo "| |(_)| ||  ___  |   | |   | (\ \) |  | |(_)| ||  __)   | (\ \) || |   | |"
+echo "| |   | || (   ) |   | |   | | \   |  | |   | || (      | | \   || |   | |"
+echo "| )   ( || )   ( |___) (___| )  \  |  | )   ( || (____/\| )  \  || (___) |"
+echo "|/     \||/     \|\_______/|/    )_)  |/     \|(_______/|/    )_)(_______)"
 echo -e "${ENDCOLOR}"
 
+# Creator name
+echo -e "${YELLOW}${BOLD}Made BY LIFEBOYGAMING${ENDCOLOR}"
+
 while true; do
-    echo -e "${YELLOW}===== ${BOLD}MAIN MENU${ENDCOLOR}${YELLOW} =====${ENDCOLOR}"
     echo -e "${GREEN}0) Install Pterodactyl Panel + Wings${ENDCOLOR}"
     echo -e "${RED}1) Exit${ENDCOLOR}"
     echo -e "${CYAN}Select an option [0-1]:${ENDCOLOR}"
