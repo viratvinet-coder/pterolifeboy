@@ -14,9 +14,8 @@ echo "╔╗ ┬ ┬       ┬  ┬┌─┐┌─┐┌┐ ┌─┐┬ ┬"
 echo "╠╩╗└┬┘  ───  │  │├┤ ├┤ ├┴┐│ │└┬┘"
 echo "╚═╝ ┴        ┴─┘┴└  └─┘└─┘└─┘ ┴"
 echo -e "${ENDCOLOR}"
-sleep 1   # Wait for 2 seconds
-
-clear      # Clear the terminal after displaying the Lifeboy banner
+sleep 2
+clear
 
 # MAIN MENU banner
 echo -e "${CYAN}${BOLD}"
@@ -30,8 +29,9 @@ echo -e "${ENDCOLOR}"
 
 while true; do
     echo -e "${GREEN}0) Install Pterodactyl Panel + Wings${ENDCOLOR}"
-    echo -e "${RED}1) Exit${ENDCOLOR}"
-    echo -e "${CYAN}Select an option [0-1]:${ENDCOLOR}"
+    echo -e "${YELLOW}1) Install Cloudflared${ENDCOLOR}"
+    echo -e "${RED}2) Exit${ENDCOLOR}"
+    echo -e "${CYAN}Select an option [0-2]:${ENDCOLOR}"
     read choice
 
     case "$choice" in
@@ -40,11 +40,32 @@ while true; do
             bash <(curl -s https://pterodactyl-installer.se/)
             ;;
         1)
+            echo -e "${YELLOW}${BOLD}Adding Cloudflare gpg key...${ENDCOLOR}"
+            sudo mkdir -p --mode=0755 /usr/share/keyrings
+            curl -fsSL https://pkg.cloudflare.com/cloudflare-public-v2.gpg | sudo tee /usr/share/keyrings/cloudflare-public-v2.gpg >/dev/null
+            echo -e "${YELLOW}Adding Cloudflared repo to your apt repositories...${ENDCOLOR}"
+            echo 'deb [signed-by=/usr/share/keyrings/cloudflare-public-v2.gpg] https://pkg.cloudflare.com/cloudflared any main' | sudo tee /etc/apt/sources.list.d/cloudflared.list
+            echo -e "${YELLOW}Installing cloudflared...${ENDCOLOR}"
+            sudo apt-get update && sudo apt-get install -y cloudflared
+            echo -e "${GREEN}${BOLD}Installation is completed!${ENDCOLOR}"
+            sleep 2
+            clear
+            # Show menu again
+            echo -e "${CYAN}${BOLD}"
+            echo "███╗   ███╗ █████╗ ██╗███╗   ██╗    ███╗   ███╗███████╗███╗   ██╗██╗   ██╗"
+            echo "████╗ ████║██╔══██╗██║████╗  ██║    ████╗ ████║██╔════╝████╗  ██║██║   ██║"
+            echo "██╔████╔██║███████║██║██╔██╗ ██║    ██╔████╔██║█████╗  ██╔██╗ ██║██║   ██║"
+            echo "██║╚██╔╝██║██╔══██║██║██║╚██╗██║    ██║╚██╔╝██║██╔══╝  ██║╚██╗██║██║   ██║"
+            echo "██║ ╚═╝ ██║██║  ██║██║██║ ╚████║    ██║ ╚═╝ ██║███████╗██║ ╚████║╚██████╔╝"
+            echo "╚═╝     ╚═╝╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝    ╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝ ╚═════╝"
+            echo -e "${ENDCOLOR}"
+            ;;
+        2)
             echo -e "${RED}Exiting.${ENDCOLOR}"
             exit 0
             ;;
         *)
-            echo -e "${RED}Invalid option. Please select 0 or 1.${ENDCOLOR}"
+            echo -e "${RED}Invalid option. Please select 0, 1, or 2.${ENDCOLOR}"
             ;;
     esac
 done
