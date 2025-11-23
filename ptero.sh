@@ -3,10 +3,20 @@
 # Color codes
 CYAN='\e[36m'
 YELLOW='\e[33m'
-GREEN='\e[32m'
 RED='\e[31m'
+GREEN='\e[32m'
 ENDCOLOR='\e[0m'
 BOLD='\e[1m'
+
+# By Lifeboy banner (shown for 2 seconds)
+echo -e "${YELLOW}${BOLD}"
+echo "╔╗ ┬ ┬       ┬  ┬┌─┐┌─┐┌┐ ┌─┐┬ ┬"
+echo "╠╩╗└┬┘  ───  │  │├┤ ├┤ ├┴┐│ │└┬┘"
+echo "╚═╝ ┴        ┴─┘┴└  └─┘└─┘└─┘ ┴"
+echo -e "${ENDCOLOR}"
+sleep 2   # Wait for 2 seconds
+
+clear      # Clear the terminal after displaying the Lifeboy banner
 
 # MAIN MENU banner
 echo -e "${CYAN}${BOLD}"
@@ -17,9 +27,6 @@ echo "██║╚██╔╝██║██╔══██║██║██�
 echo "██║ ╚═╝ ██║██║  ██║██║██║ ╚████║    ██║ ╚═╝ ██║███████╗██║ ╚████║╚██████╔╝"
 echo "╚═╝     ╚═╝╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝    ╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝ ╚═════╝"
 echo -e "${ENDCOLOR}"
-
-# Creator name
-echo -e "${YELLOW}${BOLD}Made BY LIFEBOYGAMING${ENDCOLOR}"
 
 while true; do
     echo -e "${GREEN}0) Install Pterodactyl Panel + Wings${ENDCOLOR}"
