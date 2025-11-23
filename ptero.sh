@@ -33,7 +33,7 @@ while true; do
     echo -e "${CYAN}2) Install Playit.gg${ENDCOLOR}"
     echo -e "${RED}3) Exit${ENDCOLOR}"
     echo -e "${CYAN}Select an option [0-3]:${ENDCOLOR}"
-    read choice
+    read -r choice
 
     case "$choice" in
         0)
@@ -60,7 +60,7 @@ while true; do
             sudo apt update >/dev/null 2>&1
             sudo apt install -y playit >/dev/null 2>&1
             echo -e "${GREEN}${BOLD}Playit.gg installation completed!${ENDCOLOR}"
-            read -p "Press Enter to continue..."
+            read -rp "Press Enter to continue..."
             clear
             ;;
         3)
@@ -68,4 +68,7 @@ while true; do
             exit 0
             ;;
         *)
-            echo -e "${RED}Invalid option. Please select 0, 1,
+            echo -e "${RED}Invalid option. Please select 0, 1, 2, or 3.${ENDCOLOR}"
+            ;;
+    esac
+done
