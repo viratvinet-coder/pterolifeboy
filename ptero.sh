@@ -8,6 +8,10 @@ GREEN='\e[32m'
 ENDCOLOR='\e[0m'
 BOLD='\e[1m'
 
+# Disable Ctrl+C and Ctrl+Z so users must use the menu to exit
+trap '' INT
+trap '' TSTP
+
 # By Lifeboy banner (shown for 2 seconds)
 echo -e "${YELLOW}${BOLD}"
 cat << "EOF"
@@ -19,9 +23,9 @@ echo -e "${ENDCOLOR}"
 sleep 2
 clear
 
-# MAIN MENU banner
-echo -e "${CYAN}${BOLD}"
-cat << "EOF"
+show_main_banner() {
+    echo -e "${CYAN}${BOLD}"
+    cat << "EOF"
 ███╗   ███╗ █████╗ ██╗███╗   ██╗    ███╗   ███╗███████╗███╗   ██╗██╗   ██╗
 ████╗ ████║██╔══██╗██║████╗  ██║    ████╗ ████║██╔════╝████╗  ██║██║   ██║
 ██╔████╔██║███████║██║██╔██╗ ██║    ██╔████╔██║█████╗  ██╔██╗ ██║██║   ██║
@@ -29,7 +33,10 @@ cat << "EOF"
 ██║ ╚═╝ ██║██║  ██║██║██║ ╚████║    ██║ ╚═╝ ██║███████╗██║ ╚████║╚██████╔╝
 ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝    ╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝ ╚═════╝
 EOF
-echo -e "${ENDCOLOR}"
+    echo -e "${ENDCOLOR}"
+}
+
+show_main_banner
 
 while true; do
     echo -e "${GREEN}0) Install Pterodactyl Panel + Wings${ENDCOLOR}"
@@ -62,6 +69,7 @@ while true; do
             echo -e "${GREEN}${BOLD}Cloudflared installation completed!${ENDCOLOR}"
             sleep 2
             clear
+            show_main_banner
             ;;
 
         2)
@@ -81,18 +89,7 @@ while true; do
             echo -e "${GREEN}${BOLD}Playit session finished. Returning to menu...${ENDCOLOR}"
             read -rp "Press Enter to continue..."
             clear
-
-            # Re-show MAIN MENU banner after Playit
-            echo -e "${CYAN}${BOLD}"
-            cat << "EOF"
-███╗   ███╗ █████╗ ██╗███╗   ██╗    ███╗   ███╗███████╗███╗   ██╗██╗   ██╗
-████╗ ████║██╔══██╗██║████╗  ██║    ████╗ ████║██╔════╝████╗  ██║██║   ██║
-██╔████╔██║███████║██║██╔██╗ ██║    ██╔████╔██║█████╗  ██╔██╗ ██║██║   ██║
-██║╚██╔╝██║██╔══██║██║██║╚██╗██║    ██║╚██╔╝██║██╔══╝  ██║╚██╗██║██║   ██║
-██║ ╚═╝ ██║██║  ██║██║██║ ╚████║    ██║ ╚═╝ ██║███████╗██║ ╚████║╚██████╔╝
-╚═╝     ╚═╝╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝    ╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝ ╚═════╝
-EOF
-            echo -e "${ENDCOLOR}"
+            show_main_banner
             ;;
 
         3)
