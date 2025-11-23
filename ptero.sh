@@ -8,9 +8,18 @@ GREEN='\e[32m'
 ENDCOLOR='\e[0m'
 BOLD='\e[1m'
 
-# Disable Ctrl+C and Ctrl+Z so users must use the menu to exit
-trap '' INT
-trap '' TSTP
+# Functions to control Ctrl+C / Ctrl+Z
+enable_menu_lock() {
+    # Disable Ctrl+C and Ctrl+Z (only for menu)
+    trap '' INT
+    trap '' TSTP
+}
+
+disable_menu_lock() {
+    # Restore default behavior (Ctrl+C etc. works normally)
+    trap - INT
+    trap - TSTP
+}
 
 # By Lifeboy banner (shown for 2 seconds)
 echo -e "${YELLOW}${BOLD}"
@@ -39,6 +48,9 @@ EOF
 show_main_banner
 
 while true; do
+    # Yahan sirf MENU ke liye Ctrl+C disable
+    enable_menu_lock
+
     echo -e "${GREEN}0) Install Pterodactyl Panel + Wings${ENDCOLOR}"
     echo -e "${YELLOW}1) Install Cloudflared${ENDCOLOR}"
     echo -e "${CYAN}2) Install Playit.gg${ENDCOLOR}"
@@ -46,10 +58,16 @@ while true; do
     echo -e "${CYAN}Select an option [0-3]:${ENDCOLOR}"
     read -r choice
 
+    # User ne choice select kar li -> ab installers ke liye Ctrl+C wapas normal
+    disable_menu_lock
+
     case "$choice" in
         0)
             echo -e "${GREEN}Running Pterodactyl installation...${ENDCOLOR}"
             bash <(curl -s https://pterodactyl-installer.se/)
+            # Installer se nikal ke wapas menu banner
+            clear
+            show_main_banner
             ;;
 
         1)
@@ -85,6 +103,7 @@ while true; do
 
             echo -e "${GREEN}${BOLD}Playit.gg installation completed!${ENDCOLOR}"
             echo -e "${YELLOW}Starting Playit client...${ENDCOLOR}"
+            # Yahan Ctrl+C allowed hai, user Playit se normal bahar aa sakta hai
             playit
             echo -e "${GREEN}${BOLD}Playit session finished. Returning to menu...${ENDCOLOR}"
             read -rp "Press Enter to continue..."
