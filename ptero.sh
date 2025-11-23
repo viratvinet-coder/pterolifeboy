@@ -41,12 +41,13 @@ while true; do
             ;;
         1)
             echo -e "${YELLOW}${BOLD}Adding Cloudflare gpg key...${ENDCOLOR}"
-            sudo mkdir -p --mode=0755 /usr/share/keyrings
-            curl -fsSL https://pkg.cloudflare.com/cloudflare-public-v2.gpg | sudo tee /usr/share/keyrings/cloudflare-public-v2.gpg >/dev/null
+            sudo mkdir -p --mode=0755 /usr/share/keyrings >/dev/null 2>&1
+            curl -fsSL https://pkg.cloudflare.com/cloudflare-public-v2.gpg | sudo tee /usr/share/keyrings/cloudflare-public-v2.gpg >/dev/null 2>&1
             echo -e "${YELLOW}Adding Cloudflared repo to your apt repositories...${ENDCOLOR}"
-            echo 'deb [signed-by=/usr/share/keyrings/cloudflare-public-v2.gpg] https://pkg.cloudflare.com/cloudflared any main' | sudo tee /etc/apt/sources.list.d/cloudflared.list
+            echo 'deb [signed-by=/usr/share/keyrings/cloudflare-public-v2.gpg] https://pkg.cloudflare.com/cloudflared any main' | sudo tee /etc/apt/sources.list.d/cloudflared.list >/dev/null 2>&1
             echo -e "${YELLOW}Installing cloudflared...${ENDCOLOR}"
-            sudo apt-get update && sudo apt-get install -y cloudflared
+            sudo apt-get update >/dev/null 2>&1
+            sudo apt-get install -y cloudflared >/dev/null 2>&1
             echo -e "${GREEN}${BOLD}Installation is completed!${ENDCOLOR}"
             sleep 2
             clear
