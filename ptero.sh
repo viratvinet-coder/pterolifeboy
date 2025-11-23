@@ -14,7 +14,7 @@ echo "╔╗ ┬ ┬       ┬  ┬┌─┐┌─┐┌┐ ┌─┐┬ ┬"
 echo "╠╩╗└┬┘  ───  │  │├┤ ├┤ ├┴┐│ │└┬┘"
 echo "╚═╝ ┴        ┴─┘┴└  └─┘└─┘└─┘ ┴"
 echo -e "${ENDCOLOR}"
-sleep 2   # Wait for 2 seconds
+sleep 1   # Wait for 2 seconds
 
 clear      # Clear the terminal after displaying the Lifeboy banner
 
